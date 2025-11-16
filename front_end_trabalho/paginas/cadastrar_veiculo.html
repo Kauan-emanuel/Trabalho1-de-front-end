@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Veículos</title>
+    <link rel="stylesheet" href="../css/style_index.css">
+    <link rel="stylesheet" href="../css/cadastrar_veiculo.css">
+
+</head>
+<body>
+
+    <header-placeholder></header-placeholder>
+
+    <main class="main-content">
+        <div class="welcome-card">
+            <h1>Cadastro de Veículos</h1>
+            <p>Preencha as informações abaixo.</p>
+            <hr>
+            <form id="vehicle-registration-form">
+                <div>
+                    <label for="vehicle-quantity">Quantos veículos deseja cadastrar?</label>
+                    <select id="vehicle-quantity" name="vehicle-quantity">
+                        <option value="0">Selecione a quantidade</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+
+                <!-- Os campos dos veículos serão inseridos aqui dinamicamente -->
+                <div id="vehicle-forms-container"></div>
+
+                <button type="submit" class="btn-login">Cadastrar Veículos</button>
+            </form>
+        </div>
+    </main>
+
+    <footer-placeholder></footer-placeholder>
+
+    <script src="main.js"></script>
+    <script>
+        document.getElementById('vehicle-quantity').addEventListener('change', function() {
+            const quantity = parseInt(this.value, 10);
+            const container = document.getElementById('vehicle-forms-container');
+            container.innerHTML = ''; // Limpa os campos existentes
+
+            for (let i = 1; i <= quantity; i++) {
+                const vehicleBlockHTML = `
+                    <div class="vehicle-block">
+                        <h3>Veículo ${i}</h3>
+                        <label for="tipo_veiculo_${i}">Tipo do Veículo:</label>
+                        <select id="tipo_veiculo_${i}" name="tipo_veiculo_${i}"><option value="carro">Carro</option><option value="moto">Moto</option></select>
+                        
+                        <label for="modelo_${i}">Modelo:</label>
+                        <input type="text" id="modelo_${i}" name="modelo_${i}" required>
+                        
+                        <label for="placa_${i}">Placa:</label>
+                        <input type="text" id="placa_${i}" name="placa_${i}" required>
+                        
+                        <label for="cor_${i}">Cor:</label>
+                        <input type="text" id="cor_${i}" name="cor_${i}" required>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', vehicleBlockHTML);
+            }
+        });
+    </script>
+</body>
+</html>
