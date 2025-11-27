@@ -1,9 +1,15 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Determina o caminho base para os componentes.
-    // Se a página atual estiver na pasta 'paginas', o caminho para os componentes é o diretório atual.
-    // Se a página atual estiver na raiz (como index.html), o caminho será 'paginas/'.
-    const isIndexPage = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
-    const basePath = isIndexPage ? 'paginas/' : '';
+    // Determina o caminho base relativo para a pasta 'paginas' onde os componentes estão.
+    const path = window.location.pathname;
+    let basePath = '';
+
+    if (path.includes('/paginas/crud/')) {
+        basePath = '../../paginas/';
+    } else if (path.includes('/paginas/')) {
+        basePath = ''; // Já está na pasta 'paginas' ou em uma subpasta direta
+    } else { // Raiz do projeto (ex: index.html)
+        basePath = 'paginas/';
+    }
     
     const loadComponent = (selector, url) => {
         fetch(url)

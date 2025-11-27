@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excluir Veículo</title>
+    <link rel="stylesheet" href="../css/style_index.css"> <!-- Para header/footer -->
+    <link rel="stylesheet" href="../css/style_crud.css"> <!-- Para o conteúdo -->
+</head>
+<body>
+    <header-placeholder></header-placeholder>
+
+    <main class="main-content">
+        <div class="content-card">
+            <h2>Excluir Veículo</h2>
+            <p>Insira a placa do veículo que deseja remover do sistema.</p>
+            
+            <form class="crud-form" onsubmit="if(confirm('Tem certeza que deseja excluir este veículo?')) { alert('Veículo excluído com sucesso! (Demonstração)'); } return false;">
+                <div class="form-group">
+                    <label for="placa">Placa do Veículo</label>
+                    <input type="text" id="placa" name="placa" placeholder="Ex: ABC1234" required>
+                </div>
+                <button type="submit" class="btn btn-delete">Excluir</button>
+            </form>
+
+            <div class="crud-navigation">
+                <a href="./cadastro.html" class="btn btn-create">Cadastrar</a>
+                <a href="./listar.html" class="btn btn-read">Listar</a>
+                <a href="./atualizar.html" class="btn btn-update">Atualizar</a>
+                <a href="./login.html" class="btn btn-secondary">Voltar ao Menu</a>
+            </div>
+        </div>
+    </main>
+
+    <footer-placeholder></footer-placeholder>
+    <script src="main.js"></script>
+</body>
+</html>

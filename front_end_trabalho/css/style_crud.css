@@ -1,97 +1,145 @@
-/* Estilos Gerais */
+/* Estilos gerais para as páginas CRUD */
 body {
-    background-color: #c4bdbd;
-    color: #fff;
-    font-family: sans-serif;
+    font-family: Arial, sans-serif;
+    background-color: #c4bdbd; /* Cor de fundo igual à da página de login */
+    color: #333;
     margin: 0;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-/* Layout Principal */
 .main-content {
-    flex-grow: 1;
+    flex: 1;
     display: flex;
-    align-items: center;
     justify-content: center;
-    padding: 2rem;
+    align-items: center;
+    padding: 20px;
 }
 
-/* Container do Formulário CRUD */
-.crud-form-container {
+.content-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
+    text-align: center;
 }
 
-.form-card {
-    background-color: #343a40; /* bg-dark */
+.content-card h2 {
+    margin-top: 0;
+    color: #0056b3;
+}
+
+/* Estilos da Tabela (Listar) */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.data-table th, .data-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.data-table th {
+    background-color: #007bff;
     color: white;
-    padding: 2rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 }
 
-.form-card h2 {
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 0.5rem;
+.data-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
 }
 
-.form-card p {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: rgba(255, 255, 255, 0.7);
+.data-table tbody tr:hover {
+    background-color: #ddd;
 }
 
-/* Grupos de Formulário */
+/* Estilos do Formulário (Atualizar, Excluir) */
+.crud-form {
+    margin-top: 20px;
+    text-align: left;
+}
+
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 15px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 5px;
     font-weight: bold;
 }
 
 .form-group input {
     width: 100%;
-    padding: 0.75rem;
-    font-size: 1rem;
-    color: #fff;
-    background-color: #495057;
-    border: 1px solid #6c757d;
-    border-radius: 0.25rem;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     box-sizing: border-box; /* Garante que padding não afete a largura total */
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.form-group input:focus {
-    outline: none;
-    border-color: #198754;
-    box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+hr {
+    border: 0;
+    height: 1px;
+    background: #ddd;
+    margin: 20px 0;
 }
 
-/* Botão de Envio */
-.btn-submit {
+/* Estilo para botões de submit dentro dos formulários CRUD */
+.crud-form .btn {
     width: 100%;
-    padding: 0.75rem;
+    padding: 12px 20px;
     font-size: 1.1rem;
     font-weight: bold;
-    color: #fff;
-    background-color: #198754; /* Verde sucesso */
-    border: none;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
 }
 
-.btn-submit:hover {
-    background-color: #157347; /* Verde mais escuro */
+/* Herda os estilos dos botões de login.html para consistência */
+@import url('style_login.css');
+
+/* Estilos para a navegação entre páginas CRUD */
+.crud-navigation {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.crud-navigation .btn {
+    text-decoration: none;
+    padding: 0.5rem 1.2rem; /* Aumenta o padding para botões maiores */
+    font-size: 1rem; /* Garante um tamanho de fonte consistente */
+}
+
+/* Cores específicas para os botões de navegação */
+.btn.btn-create {
+    background-color: #28a745; /* Verde mais claro */
+    border-color: #28a745;
+}
+
+.btn.btn-read {
+    background-color: #007bff; /* Azul mais claro */
+    border-color: #007bff;
+}
+
+.btn.btn-update {
+    background-color: #ffca2c; /* Amarelo um pouco mais claro */
+    border-color: #ffca2c;
+    color: #000;
+}
+
+.btn.btn-delete {
+    background-color: #e74c3c; /* Vermelho mais claro */
+    border-color: #e74c3c;
+}
+
+.btn.btn-secondary {
+    background-color: #868e96; /* Cinza mais claro */
+    border-color: #868e96;
 }
