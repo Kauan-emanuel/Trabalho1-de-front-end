@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Cadastrar Veículos</title>
     <link rel="stylesheet" href="../css/style_index.css">
+    <link rel="stylesheet" href="../css/style_crud.css"> <!-- Adicionado para consistência -->
     <link rel="stylesheet" href="../css/cadastrar_veiculo.css">
 
 </head>
@@ -12,14 +13,14 @@
     <header-placeholder></header-placeholder>
 
     <main class="main-content">
-        <div class="welcome-card">
+        <div class="content-card"> <!-- Alterado para content-card para consistência -->
             <h1>Cadastro de Veículos</h1>
             <p>Preencha as informações abaixo.</p>
             <hr>
-            <form id="vehicle-registration-form">
-                <div>
+            <form id="vehicle-registration-form" class="crud-form"> <!-- Adicionada classe crud-form -->
+                <div class="form-group">
                     <label for="vehicle-quantity">Quantos veículos deseja cadastrar?</label>
-                    <select id="vehicle-quantity" name="vehicle-quantity">
+                    <select id="vehicle-quantity" name="vehicle-quantity" class="form-control" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
                         <option value="0">Selecione a quantidade</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -32,8 +33,15 @@
                 <!-- Os campos dos veículos serão inseridos aqui dinamicamente -->
                 <div id="vehicle-forms-container"></div>
 
-                <button type="submit" class="btn-login">Cadastrar Veículos</button>
+                <button type="submit" class="btn btn-create">Cadastrar Veículos</button>
             </form>
+
+            <div class="crud-navigation">
+                <a href="./listar.html" class="btn btn-read">Listar</a>
+                <a href="./atualizar.html" class="btn btn-update">Atualizar</a>
+                <a href="./excluir.html" class="btn btn-delete">Excluir</a>
+                <a href="./login.html" class="btn btn-secondary">Voltar ao Menu</a>
+            </div>
         </div>
     </main>
 
