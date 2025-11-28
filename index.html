@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Página Inicial</title>
+    <link rel="stylesheet" href="./css/style_index.css">
+</head>
+<body>
+
+    <header-placeholder></header-placeholder>
+    
+    <!-- BLOCO CENTRAL -->
+    <main class="main-content">
+        <div class="welcome-card">
+            <h1>Bem-vindo ao Sistema</h1>
+            <p class="lead">Aqui você acessa os principais recursos do Sistema de Controle de Estacionamento.</p>
+            <hr>
+            <p>Use o menu acima para navegar entre as páginas.</p>
+            <a href="#" id="login-btn" class="btn-login">Ir para Login</a>
+        </div>
+    </main>
+    
+    <footer-placeholder></footer-placeholder>
+
+    <script src="paginas/main.js"></script>
+    <script>
+        document.getElementById('login-btn').addEventListener('click', function(event) {
+            event.preventDefault(); // Impede a navegação padrão do link
+
+            // 1. Solicita o nome de escala
+            const nomeEscala = prompt("Por favor, insira seu nome de escala:");
+            if (nomeEscala === null || nomeEscala.trim() === "") {
+                alert("Operação cancelada ou nome de escala inválido.");
+                return; // Para a execução se o usuário cancelar ou não inserir nada
+            }
+
+            // 2. Solicita a matrícula
+            const matriculaStr = prompt("Por favor, insira sua matrícula (4 dígitos, de 0001 a 9999):");
+            if (matriculaStr === null) {
+                alert("Operação cancelada.");
+                return; // Para a execução se o usuário cancelar
+            }
+
+            // 3. Valida a matrícula
+            const matriculaRegex = /^\d{4}$/; // Expressão regular para 4 dígitos
+            if (matriculaRegex.test(matriculaStr)) {
+                const matriculaNum = parseInt(matriculaStr, 10);
+                if (matriculaNum >= 1 && matriculaNum <= 9999) {
+                    // Se a validação for bem-sucedida, redireciona para a página de login
+                    window.location.href = './paginas/login.html';
+                } else {
+                    alert("Matrícula inválida. Deve ser um número entre 0001 e 9999.");
+                }
+            } else {
+                alert("Formato de matrícula inválido. Por favor, insira exatamente 4 dígitos numéricos.");
+            }
+        });
+    </script>
+</body>
+</html>

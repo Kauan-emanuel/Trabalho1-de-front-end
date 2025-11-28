@@ -1,0 +1,181 @@
+/* Estilos Gerais */
+body {
+    background-color: #c4bdbd; /* fundo escuro */
+    color: #fff;
+    font-family: sans-serif;
+    margin: 0;
+    height: 100vh; /* Garante que o body ocupe exatamente a altura da tela */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Impede a criação de barras de rolagem */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #198754; /* bg-success */
+    color: white;
+    padding: 0.5rem 1rem;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    width: 100%;
+}
+
+.navbar-brand {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.navbar-nav {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    margin-left: 1rem;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.75);
+    padding: 0.5rem;
+    display: block;
+}
+
+.nav-link.active,
+.nav-link:hover {
+    color: white;
+}
+
+.welcome-card {
+    background-color: #6c757d; /* bg-secondary */
+    color: white;
+    padding: 3rem; /* p-5 */
+    border-radius: 0.375rem; /* rounded */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* shadow */
+    text-align: left;
+}
+
+.welcome-card h1 {
+    margin-bottom: 1rem; /* mb-3 */
+}
+
+.welcome-card .lead {
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+.welcome-card hr {
+    border: 2px solid rgb(0, 253, 55);
+    margin: 1rem 0;
+}
+
+.btn-login {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #198754; /* btn-success */
+    border: 1px solid #198754;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+/* Conteúdo Principal */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    /* Alterado para esticar o conteúdo filho */
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: stretch;
+    padding: 0; /* Removemos o padding para o card colar nas bordas */
+}
+
+/* Rodapé */
+.footer {
+    background-color: #198754; /* bg-success */
+    color: white;
+    text-align: center;
+    padding: 1rem 0; /* py-3 */
+    margin-top: auto; /* Empurra o rodapé para baixo */
+}
+
+/* Estilos para o Card de CRUD */
+.crud-card {
+    background-color: #343a40; /* bg-dark */
+    color: white;
+    /* Alterado para ocupar o espaço e centralizar o conteúdo interno */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem; /* Mantém o espaçamento interno */
+    border-radius: 0; /* Removemos o radius para um encaixe perfeito */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 100%;
+}
+
+.crud-card h2 {
+    font-size: 2.5rem; /* Aumentado para destaque */
+    margin-bottom: 1rem;
+}
+
+.crud-card p {
+    font-size: 1.25rem; /* Aumentado para melhor leitura */
+    margin-bottom: 2.5rem; /* Mais espaço antes dos botões */
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.crud-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem; /* Aumenta o espaço entre os botões */
+    justify-content: center;
+}
+
+/* Estilo base para os botões do CRUD */
+.crud-buttons .btn {
+    padding: 15px 30px; /* Botões maiores */
+    font-size: 1.1rem; /* Fonte maior nos botões */
+    font-weight: bold;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.crud-buttons .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Cores específicas para cada botão */
+.btn-create { background-color: #28a745; } /* Verde */
+.btn-read   { background-color: #0d6efd; } /* Azul */
+.btn-update { background-color: #ffc107; } /* Amarelo */
+.btn-delete { background-color: #dc3545; } /* Vermelho */
+
+.btn-create:hover { background-color: #218838; }
+.btn-read:hover   { background-color: #0b5ed7; }
+.btn-update:hover { background-color: #ffca2c; }
+.btn-delete:hover { background-color: #bb2d3b; }

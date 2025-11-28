@@ -1,0 +1,114 @@
+/* Estilos Gerais */
+body {
+    background-color: #c4bdbd; /* fundo escuro */
+    color: #fff;
+    font-family: sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #198754; /* bg-success */
+    color: white;
+    padding: 0.5rem 1rem;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    width: 100%;
+}
+
+.navbar-brand {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.navbar-nav {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    margin-left: 1rem;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.75);
+    padding: 0.5rem;
+    display: block;
+}
+
+.nav-link.active,
+.nav-link:hover {
+    color: white;
+}
+
+/* Conteúdo Principal */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.welcome-card {
+    background-color: #6c757d; /* bg-secondary */
+    color: white;
+    padding: 3rem; /* p-5 */
+    border-radius: 0.375rem; /* rounded */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* shadow */
+    text-align: left;
+}
+
+.welcome-card h1 {
+    margin-bottom: 1rem; /* mb-3 */
+}
+
+.welcome-card .lead {
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+.welcome-card hr {
+    border: 2px solid rgb(0, 253, 55);
+    margin: 1rem 0;
+}
+
+.btn-login {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #198754; /* btn-success */
+    border: 1px solid #198754;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+/* Rodapé */
+.footer {
+    background-color: #198754; /* bg-success */
+    color: white;
+    text-align: center;
+    padding: 1rem 0; /* py-3 */
+    margin-top: auto; /* Empurra o rodapé para baixo */
+}
