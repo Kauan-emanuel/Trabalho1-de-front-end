@@ -1,16 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Determina o caminho base relativo para a pasta 'paginas' onde os componentes estão.
-    const path = window.location.pathname;
-    let basePath = '';
-
-    if (path.includes('/paginas/crud/')) {
-        basePath = '../../paginas/';
-    } else if (path.includes('/paginas/')) {
-        basePath = ''; // Já está na pasta 'paginas' ou em uma subpasta direta
-    } else { // Raiz do projeto (ex: index.html)
-        basePath = 'paginas/';
-    }
-    
+    // Função para carregar um componente HTML (como header ou footer) em um elemento placeholder.
     const loadComponent = (selector, url) => {
         fetch(url)
             .then(response => {
@@ -31,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     // Carrega os componentes usando o caminho do diretório do script como base
-    loadComponent('header-placeholder', `${basePath}header.html`);
-    loadComponent('footer-placeholder', `${basePath}footer.html`);
+    // Como header.html e footer.html estão na mesma pasta, o caminho é direto.
+    loadComponent('header-placeholder', 'header.html');
+    loadComponent('footer-placeholder', 'footer.html');
 });
