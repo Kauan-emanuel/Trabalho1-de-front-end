@@ -15,7 +15,7 @@
             <h2>Excluir Veículo</h2>
             <p>Insira a placa do veículo que deseja remover do sistema.</p>
             
-            <form class="crud-form" onsubmit="if(confirm('Tem certeza que deseja excluir este veículo?')) { alert('Veículo excluído com sucesso! (Demonstração)'); } return false;">
+            <form id="delete-form" class="crud-form">
                 <div class="form-group">
                     <label for="placa">Placa do Veículo</label>
                     <input type="text" id="placa" name="placa" placeholder="Ex: ABC1234" required>
@@ -24,7 +24,7 @@
             </form>
 
             <div class="crud-navigation">
-                <a href="cadastro.html" class="btn btn-create">Cadastrar</a>
+                <a href="cadastrar_veiculo.html" class="btn btn-create">Cadastrar</a>
                 <a href="listar.html" class="btn btn-read">Listar</a>
                 <a href="atualizar.html" class="btn btn-update">Atualizar</a>
                 <a href="login.html" class="btn btn-secondary">Voltar ao Menu</a>
@@ -34,5 +34,30 @@
 
     <footer-placeholder></footer-placeholder>
     <script src="main.js"></script>
+    <script>
+        document.getElementById('delete-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+
+            const placaToDelete = document.getElementById('placa').value.trim();
+            if (!placaToDelete) {
+                alert('Por favor, insira uma placa.');
+                return;
+            }
+
+            let vehicles = JSON.parse(localStorage.getItem('vehicles')) || [];
+            const vehicleIndex = vehicles.findIndex(v => v.placa === placaToDelete);
+
+            if (vehicleIndex !== -1) {
+                if (confirm(`Tem certeza que deseja excluir o veículo com a placa ${placaToDelete}?`)) {
+                    vehicles.splice(vehicleIndex, 1); // Remove o veículo do array
+                    localStorage.setItem('vehicles', JSON.stringify(vehicles)); // Atualiza o localStorage
+                    alert('Veículo excluído com sucesso!');
+                    window.location.href = 'listar.html'; // Redireciona para a lista
+                }
+            } else {
+                alert('Veículo com esta placa não encontrado.');
+            }
+        });
+    </script>
 </body>
 </html>

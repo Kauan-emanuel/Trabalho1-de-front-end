@@ -19,39 +19,18 @@
                 <thead>
                     <tr>
                         <th>Placa</th>
+                        <th>Tipo</th>
                         <th>Modelo</th>
                         <th>Cor</th>
-                        <th>Proprietário</th>
-                        <th>Vaga</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>BRA2E19</td>
-                        <td>Honda Civic</td>
-                        <td>Preto</td>
-                        <td>João Silva</td>
-                        <td>A-01</td>
-                    </tr>
-                    <tr>
-                        <td>ABC1234</td>
-                        <td>Ford Ka</td>
-                        <td>Vermelho</td>
-                        <td>Maria Souza</td>
-                        <td>B-05</td>
-                    </tr>
-                    <tr>
-                        <td>XYZ5678</td>
-                        <td>Chevrolet Onix</td>
-                        <td>Branco</td>
-                        <td>Carlos Pereira</td>
-                        <td>C-12</td>
-                    </tr>
+                <tbody id="vehicle-list">
+                    <!-- Os dados dos veículos serão inseridos aqui via JavaScript -->
                 </tbody>
             </table>
 
-            <div class="crud-navigation">
-                <a href="cadastro.html" class="btn btn-create">Cadastrar</a>
+            <div class="crud-navigation" style="margin-top: 20px;">
+                <a href="cadastrar_veiculo.html" class="btn btn-create">Cadastrar Novo Veículo</a>
                 <a href="atualizar.html" class="btn btn-update">Atualizar</a>
                 <a href="excluir.html" class="btn btn-delete">Excluir</a>
                 <a href="login.html" class="btn btn-secondary">Voltar ao Menu</a>
@@ -61,5 +40,27 @@
 
     <footer-placeholder></footer-placeholder>
     <script src="main.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const vehicles = JSON.parse(localStorage.getItem('vehicles')) || [];
+            const vehicleListBody = document.getElementById('vehicle-list');
+
+            if (vehicles.length === 0) {
+                const emptyRow = `<tr><td colspan="4" style="text-align: center;">Nenhum veículo cadastrado.</td></tr>`;
+                vehicleListBody.innerHTML = emptyRow;
+            } else {
+                vehicles.forEach(vehicle => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${vehicle.placa}</td>
+                        <td>${vehicle.tipo}</td>
+                        <td>${vehicle.modelo}</td>
+                        <td>${vehicle.cor}</td>
+                    `;
+                    vehicleListBody.appendChild(row);
+                });
+            }
+        });
+    </script>
 </body>
 </html>

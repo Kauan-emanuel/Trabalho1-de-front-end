@@ -2,46 +2,64 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atualizar Veículo</title>
-    <link rel="stylesheet" href="style_index.css"> <!-- Para header/footer -->
-    <link rel="stylesheet" href="style_crud.css"> <!-- Para o conteúdo -->
+    <link rel="stylesheet" href="style_index.css">
+    <link rel="stylesheet" href="style_crud.css">
+    <link rel="stylesheet" href="cadastrar_veiculo.css"> <!-- Reutilizando estilos -->
 </head>
 <body>
+
     <header-placeholder></header-placeholder>
 
     <main class="main-content">
         <div class="content-card">
-            <h2>Atualizar Dados do Veículo</h2>
-            <p>Insira a placa do veículo que deseja atualizar e preencha os novos dados.</p>
-            
-            <form class="crud-form" onsubmit="alert('Dados atualizados com sucesso! (Demonstração)'); return false;">
+            <h1>Atualizar Veículo</h1>
+            <p>Digite a placa do veículo que deseja atualizar.</p>
+            <hr>
+
+            <!-- Formulário de Busca -->
+            <form id="search-form" class="crud-form">
                 <div class="form-group">
-                    <label for="placa-busca">Placa do Veículo para Busca</label>
-                    <input type="text" id="placa-busca" name="placa-busca" placeholder="Ex: ABC1234" required>
+                    <label for="search-placa">Placa do Veículo:</label>
+                    <input type="text" id="search-placa" name="search-placa" class="form-control" placeholder="Digite a placa para buscar" required>
                 </div>
-                <button type="button" class="btn btn-read" onclick="alert('Veículo encontrado! (Demonstração)')">Buscar</button>
+                <button type="submit" class="btn btn-read">Buscar Veículo</button>
+            </form>
+
+            <!-- Formulário de Atualização (inicialmente oculto) -->
+            <form id="update-form" class="crud-form" style="display: none;">
+                <h3>Editando Veículo</h3>
+                <input type="hidden" id="original-placa">
                 
-                <hr>
+                <div class="form-group">
+                    <label for="update-tipo">Tipo do Veículo:</label>
+                    <select id="update-tipo" name="update-tipo" class="form-control">
+                        <option value="carro">Carro</option>
+                        <option value="moto">Moto</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="update-modelo">Modelo:</label>
+                    <input type="text" id="update-modelo" name="update-modelo" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="update-placa">Placa:</label>
+                    <input type="text" id="update-placa" name="update-placa" class="form-control" required>
+                </div>
 
                 <div class="form-group">
-                    <label for="modelo">Modelo</label>
-                    <input type="text" id="modelo" name="modelo" value="Ford Ka">
+                    <label for="update-cor">Cor:</label>
+                    <input type="text" id="update-cor" name="update-cor" class="form-control" required>
                 </div>
-                <div class="form-group">
-                    <label for="cor">Cor</label>
-                    <input type="text" id="cor" name="cor" value="Vermelho">
-                </div>
-                <div class="form-group">
-                    <label for="proprietario">Proprietário</label>
-                    <input type="text" id="proprietario" name="proprietario" value="Maria Souza">
-                </div>
-                <button type="submit" class="btn btn-update">Atualizar</button>
+
+                <button type="submit" class="btn btn-update">Salvar Alterações</button>
             </form>
 
             <div class="crud-navigation">
-                <a href="cadastro.html" class="btn btn-create">Cadastrar</a>
                 <a href="listar.html" class="btn btn-read">Listar</a>
+                <a href="cadastrar_veiculo.html" class="btn btn-create">Cadastrar</a>
                 <a href="excluir.html" class="btn btn-delete">Excluir</a>
                 <a href="login.html" class="btn btn-secondary">Voltar ao Menu</a>
             </div>
@@ -49,6 +67,55 @@
     </main>
 
     <footer-placeholder></footer-placeholder>
+
     <script src="main.js"></script>
+    <script>
+        const searchForm = document.getElementById('search-form');
+        const updateForm = document.getElementById('update-form');
+        const searchPlacaInput = document.getElementById('search-placa');
+
+        searchForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const placaToFind = searchPlacaInput.value.trim();
+            const vehicles = JSON.parse(localStorage.getItem('vehicles')) || [];
+            const vehicle = vehicles.find(v => v.placa === placaToFind);
+
+            if (vehicle) {
+                document.getElementById('original-placa').value = vehicle.placa;
+                document.getElementById('update-tipo').value = vehicle.tipo;
+                document.getElementById('update-modelo').value = vehicle.modelo;
+                document.getElementById('update-placa').value = vehicle.placa;
+                document.getElementById('update-cor').value = vehicle.cor;
+                
+                updateForm.style.display = 'block';
+            } else {
+                alert('Veículo com esta placa não encontrado.');
+                updateForm.style.display = 'none';
+            }
+        });
+
+        updateForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const originalPlaca = document.getElementById('original-placa').value;
+            let vehicles = JSON.parse(localStorage.getItem('vehicles')) || [];
+            
+            const vehicleIndex = vehicles.findIndex(v => v.placa === originalPlaca);
+
+            if (vehicleIndex !== -1) {
+                vehicles[vehicleIndex] = {
+                    tipo: document.getElementById('update-tipo').value,
+                    modelo: document.getElementById('update-modelo').value,
+                    placa: document.getElementById('update-placa').value,
+                    cor: document.getElementById('update-cor').value,
+                };
+
+                localStorage.setItem('vehicles', JSON.stringify(vehicles));
+                alert('Veículo atualizado com sucesso!');
+                window.location.href = 'listar.html';
+            } else {
+                alert('Erro: Veículo original não encontrado para atualização.');
+            }
+        });
+    </script>
 </body>
 </html>

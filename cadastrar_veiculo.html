@@ -20,14 +20,7 @@
             <form id="vehicle-registration-form" class="crud-form"> <!-- Adicionada classe crud-form -->
                 <div class="form-group">
                     <label for="vehicle-quantity">Quantos veículos deseja cadastrar?</label>
-                    <select id="vehicle-quantity" name="vehicle-quantity" class="form-control" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-                        <option value="0">Selecione a quantidade</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
+                    <input type="number" id="vehicle-quantity" name="vehicle-quantity" class="form-control" min="1" placeholder="Digite a quantidade de veículos" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
                 </div>
 
                 <!-- Os campos dos veículos serão inseridos aqui dinamicamente -->
@@ -49,8 +42,8 @@
 
     <script src="main.js"></script>
     <script>
-        document.getElementById('vehicle-quantity').addEventListener('change', function() {
-            const quantity = parseInt(this.value, 10);
+        document.getElementById('vehicle-quantity').addEventListener('input', function() {
+            const quantity = parseInt(this.value, 10) || 0;
             const container = document.getElementById('vehicle-forms-container');
             container.innerHTML = ''; // Limpa os campos existentes
 
@@ -73,6 +66,52 @@
                 `;
                 container.insertAdjacentHTML('beforeend', vehicleBlockHTML);
             }
+        });
+
+        document.getElementById('vehicle-registration-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+
+            const quantity = parseInt(document.getElementById('vehicle-quantity').value, 10) || 0;
+            if (quantity === 0) {
+                alert('Por favor, insira uma quantidade de veículos válida.');
+                return;
+            }
+
+            const existingVehicles = JSON.parse(localStorage.getItem('vehicles')) || [];
+            const existingPlates = new Set(existingVehicles.map(v => v.placa));
+            const newVehicles = [];
+            const newPlatesInBatch = new Set();
+
+            for (let i = 1; i <= quantity; i++) {
+                const placa = document.getElementById(`placa_${i}`).value;
+
+                // Verifica duplicidade na submissão atual
+                if (newPlatesInBatch.has(placa)) {
+                    alert(`Placa duplicada no formulário: ${placa}. Por favor, insira placas únicas para cada veículo.`);
+                    return;
+                }
+
+                // Verifica se a placa já existe no localStorage
+                if (existingPlates.has(placa)) {
+                    alert(`A placa ${placa} (Veículo ${i}) já está cadastrada. Por favor, insira uma placa diferente.`);
+                    return;
+                }
+
+                newPlatesInBatch.add(placa);
+
+                const vehicle = {
+                    tipo: document.getElementById(`tipo_veiculo_${i}`).value,
+                    modelo: document.getElementById(`modelo_${i}`).value,
+                    placa: placa,
+                    cor: document.getElementById(`cor_${i}`).value,
+                };
+                newVehicles.push(vehicle);
+            }
+
+            const updatedVehicles = existingVehicles.concat(newVehicles);
+            localStorage.setItem('vehicles', JSON.stringify(updatedVehicles));
+            alert('Veículo(s) cadastrado(s) com sucesso!');
+            window.location.href = 'listar.html'; // Redireciona para a página de listagem
         });
     </script>
 </body>
